@@ -2,14 +2,17 @@
   "name": "devconnector",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "dist/server/server.js",
   "scripts": {
     "start": "node server",
-    "server": "nodemon server"
+    "server": "nodemon server",
+    "tsc": "tsc"
   },
   "author": "Me",
   "license": "MIT",
   "dependencies": {
+    "@types/express": "^4.17.7",
+    "@types/mongoose": "^5.7.36",
     "bcryptjs": "^2.4.3",
     "config": "^3.3.1",
     "express": "^4.17.1",
@@ -21,6 +24,8 @@
   },
   "devDependencies": {
     "concurrently": "^5.3.0",
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.4",
+    "tslint": "^6.1.3",
+    "typescript": "^4.0.2"
   }
 }
