@@ -4,8 +4,8 @@
   "description": "",
   "main": "dist/server/server.js",
   "scripts": {
-    "start": "node server",
-    "server": "nodemon server",
+    "start": "node ./server/server.js",
+    "server": "nodemon ./server/server.js",
     "tsc": "tsc"
   },
   "author": "Me",
