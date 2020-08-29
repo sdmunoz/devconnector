@@ -1,8 +1,8 @@
 const routes = require('express').Router();
-const auth = require('./auth/auth');
-const posts = require('./posts/posts');
-const profile = require('./profile/profile');
-const users = require('./users/users');
+const auth = require('./auth/index');
+const posts = require('./posts/index');
+const profile = require('./profile/index');
+const users = require('./users/post-register-user');
 
 routes.use('/api/auth', auth);
 routes.use('/api/posts', posts);
