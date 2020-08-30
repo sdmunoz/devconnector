@@ -1,5 +1,6 @@
-const express = require('express');
-const connectDB = require('../config/db');
+import express from 'express';
+import connectDB from '../../devconnector/config/db.js';
+import mainRoutes from './routes/api/index';
 
 const app = express();
 
@@ -7,12 +8,12 @@ const app = express();
 connectDB();
 
 // Init Middleware
-app.use(express.json({ extended: false }));
+app.use(express.json());
 
 app.get('/', (req, res) => res.send('API Running'));
 
 // Define Main Route
-app.use('/', require('./routes/api/index'));
+app.use('/', mainRoutes);
 
 const PORT = process.env.PORT || 5000;
 
