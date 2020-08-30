@@ -1,16 +1,18 @@
-const express = require('express');
-const router = express.Router();
-const { check, validationResult } = require('express-validator');
-const gravatar = require('gravatar');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const User = require('../../../models/User');
-const config = require('config');
+import express, { Router, Request, Response } from 'express';
+import { check, validationResult, Result } from 'express-validator';
+import gravatar from 'gravatar';
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import User from '../../../models/User';
+import config from 'config';
+import { RequestBody } from '../api.interfaces';
+
+const userRouter: Router = express.Router();
 
 // @route   POST api/users
 // @desc    Register user
-// @access  Public
-router.post(
+// @access  Public{}
+userRouter.post(
   '/',
   [
     check('name', 'Name is required').not().isEmpty(),
@@ -20,23 +22,24 @@ router.post(
       'Please enter a password with 6 or more characters'
     ).isLength({ min: 6 }),
   ],
-  async (req, res) => {
-    const errors = validationResult(req);
+  async (req: Request, res: Response) => {
+    const errors: Result = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { name, email, password } = req.body;
+    // const name = req.body.name;
+    const { name, email, password }: RequestBody = req.body as RequestBody;
 
     try {
-      let user = await User.findOne({ email });
+      let user: User = await User.findOne({ email });
       if (user) {
         return res
           .status(400)
           .json({ errors: [{ msg: 'User already exists' }] });
       }
 
-      const avatar = gravatar.url(email, {
+      const avatar: string = gravatar.url(email, {
         s: '200',
         r: 'pg',
         d: 'mm',
@@ -49,13 +52,13 @@ router.post(
         password,
       });
 
-      const salt = await bcrypt.genSalt(10);
+      const salt: string = await bcrypt.genSalt(10);
 
       user.password = await bcrypt.hash(password, salt);
 
       await user.save();
 
-      const payload = {
+      const payload: unknown = {
         user: {
           id: user.id,
         },
@@ -65,7 +68,7 @@ router.post(
         payload,
         config.get('jwtToken'),
         { expiresIn: 3600 },
-        (err, token) => {
+        (err: string, token: string) => {
           if (err) return err;
           return res.json({ token });
         }
@@ -77,4 +80,4 @@ router.post(
   }
 );
 
-module.exports = router;
+export default userRouter;
