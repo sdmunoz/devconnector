@@ -4,9 +4,11 @@
   "description": "",
   "main": "dist/server/server.js",
   "scripts": {
+    "build-server": "yarn build-ts && yarn tslint",
+    "build-ts": "tsc",
     "start": "node ./server/server.js",
     "server": "nodemon ./server/server.js",
-    "tsc": "tsc"
+    "tslint": "tslint -c tslint.json -p tsconfig.json"
   },
   "author": "Me",
   "license": "MIT",
