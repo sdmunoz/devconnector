@@ -1,11 +1,11 @@
-import express, { Router, Request, Response } from 'express';
+import express, { Router, Response } from 'express';
 import { check, validationResult, Result } from 'express-validator';
 import gravatar from 'gravatar';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import User from '../../../models/User';
 import config from 'config';
-import { RequestBody } from '../api.interfaces';
+import { IGetUserAuthBodyRequest } from '../api.interfaces';
 
 const userRouter: Router = express.Router();
 
@@ -22,14 +22,13 @@ userRouter.post(
       'Please enter a password with 6 or more characters'
     ).isLength({ min: 6 }),
   ],
-  async (req: Request, res: Response) => {
+  async (req: IGetUserAuthBodyRequest, res: Response) => {
     const errors: Result = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
 
-    // const name = req.body.name;
-    const { name, email, password }: RequestBody = req.body as RequestBody;
+    const { name, email, password }: IGetUserAuthBodyRequest = req.body;
 
     try {
       let user: User = await User.findOne({ email });
