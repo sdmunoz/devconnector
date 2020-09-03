@@ -9,4 +9,4 @@ getPostsRouter.get('/', (req: Request, res: Response) =>
   res.send('Posts Route')
 );
 
-export default router;
+export default getPostsRouter;
