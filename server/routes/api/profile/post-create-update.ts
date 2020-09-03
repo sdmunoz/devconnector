@@ -1,15 +1,18 @@
-const express = require('express');
-const router = express.Router();
-const auth = require('../../../middleware/auth');
-const { check, validationResult } = require('express-validator');
+import express, { Router, Response } from 'express';
+import Profile from '../../../models/Profile';
+import auth from '../../../middleware/auth';
+import { check, validationResult, Result } from 'express-validator';
+import {
+  IGetUserAuthBodyRequest,
+  IGetUserAuthInfoRequest,
+} from '../api.interfaces';
 
-const Profile = require('../../../models/Profile');
-const User = require('../../../models/User');
+const postCreateUpdateRouter: Router = express.Router();
 
 // @route   Post api/profile
 // @desc    Create or Update a user profile
 // @access  Private
-module.exports = router.post(
+postCreateUpdateRouter.post(
   '/',
   [
     auth,
@@ -18,8 +21,11 @@ module.exports = router.post(
       check('skills', 'Skills is required').not().isEmpty(),
     ],
   ],
-  async (req, res) => {
-    const errors = validationResult(req);
+  async (
+    req: IGetUserAuthBodyRequest & IGetUserAuthInfoRequest,
+    res: Response
+  ) => {
+    const errors: Result = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
@@ -37,10 +43,10 @@ module.exports = router.post(
       twitter,
       instagram,
       linkedin,
-    } = req.body;
+    }: IGetUserAuthBodyRequest = req.body;
 
-    // Build profile objecy
-    const profileFields = {};
+    // Build profile object
+    const profileFields: Record<string, any> = {};
     profileFields.user = req.user.id;
     if (company) profileFields.company = company;
     if (website) profileFields.website = website;
@@ -49,7 +55,9 @@ module.exports = router.post(
     if (status) profileFields.status = status;
     if (githubusername) profileFields.githubusername = githubusername;
     if (skills) {
-      profileFields.skills = skills.split(',').map((skill) => skill.trim());
+      profileFields.skills = skills
+        .split(',')
+        .map((skill: string) => skill.trim());
     }
 
     // Build social object
@@ -61,7 +69,7 @@ module.exports = router.post(
     if (instagram) profileFields.social.instagram = instagram;
 
     try {
-      let profile = await Profile.findOne({ user: req.user.id });
+      let profile: Profile = await Profile.findOne({ user: req.user.id });
 
       if (profile) {
         // Update
@@ -84,3 +92,5 @@ module.exports = router.post(
     }
   }
 );
+
+export default postCreateUpdateRouter;

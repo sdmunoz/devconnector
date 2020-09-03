@@ -1,14 +1,19 @@
-const express = require('express');
-const router = express.Router();
-const auth = require('../../../middleware/auth');
-const { check, validationResult } = require('express-validator');
+import express, { Router, Request, Response } from 'express';
+import Profile from '../../../models/Profile';
+import auth from '../../../middleware/auth';
+import { check, validationResult, Result } from 'express-validator';
+import {
+  IGetUserAuthBodyRequest,
+  IGetUserAuthInfoRequest,
+} from '../api.interfaces';
+import { Profiler } from 'inspector';
 
-const Profile = require('../../../models/Profile');
+const putProfileExperienceRouter: Router = express.Router();
 
 // @route   Put api/profile/experience
 // @desc    Add profile experience
 // @access  Private
-module.exports = router.put(
+putProfileExperienceRouter.put(
   '/experience',
   [
     auth,
@@ -18,8 +23,8 @@ module.exports = router.put(
       check('from', 'From date is required').not().isEmpty(),
     ],
   ],
-  async (req, res) => {
-    const errors = validationResult(req);
+  async (req: IGetUserAuthInfoRequest, res: Response) => {
+    const errors: Result = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
@@ -32,9 +37,9 @@ module.exports = router.put(
       to,
       current,
       description,
-    } = req.body;
+    }: IGetUserAuthBodyRequest = req.body;
 
-    const newExp = {
+    const newExp: Record<string, unknown> = {
       title,
       company,
       location,
@@ -45,7 +50,7 @@ module.exports = router.put(
     };
 
     try {
-      const profile = await Profile.findOne({ user: req.user.id });
+      const profile: Profile = await Profile.findOne({ user: req.user.id });
       profile.experience.unshift(newExp);
 
       await profile.save();
@@ -56,3 +61,5 @@ module.exports = router.put(
     }
   }
 );
+
+export default putProfileExperienceRouter;
