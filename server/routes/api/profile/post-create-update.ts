@@ -46,6 +46,7 @@ postCreateUpdateRouter.post(
     }: IGetUserAuthBodyRequest = req.body;
 
     // Build profile object
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const profileFields: Record<string, any> = {};
     profileFields.user = req.user.id;
     if (company) profileFields.company = company;

@@ -1,4 +1,4 @@
-import express, { Router, Request, Response } from 'express';
+import express, { Router, Response } from 'express';
 import Profile from '../../../models/Profile';
 import auth from '../../../middleware/auth';
 import { check, validationResult, Result } from 'express-validator';
@@ -6,7 +6,6 @@ import {
   IGetUserAuthBodyRequest,
   IGetUserAuthInfoRequest,
 } from '../api.interfaces';
-import { Profiler } from 'inspector';
 
 const putProfileExperienceRouter: Router = express.Router();
 
