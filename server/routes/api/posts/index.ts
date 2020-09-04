@@ -1,8 +1,8 @@
 import express, { Router } from 'express';
 import getPosts from './posts';
 
-const posts: Router = express.Router();
+const postRouter: Router = express.Router();
 
-posts.get('/', getPosts);
+postRouter.get('/', getPosts);
 
-export default posts;
+export default postRouter;

@@ -5,15 +5,15 @@ import deleteUserProfileRouter from './delete-user-profile';
 import getProfileByIdRouter from './get-profile-by-id';
 import getProfileMeRouter from './get-profile-me';
 import postCreateUpdateRouter from './post-create-update';
-const profile: Router = express.Router();
+const profileRouter: Router = express.Router();
 // const putProfileExperience = require('./put-profile-experience');
 
-profile.delete('/experience/:exp_id', deleteProfileExperienceRouter);
-profile.delete('/', deleteUserProfileRouter);
-profile.get('/', getAllProfilesRouter);
-profile.get('/user/:user_id', getProfileByIdRouter);
-profile.get('/me', getProfileMeRouter);
-profile.post('/', postCreateUpdateRouter);
+profileRouter.delete('/experience/:exp_id', deleteProfileExperienceRouter);
+profileRouter.delete('/', deleteUserProfileRouter);
+profileRouter.get('/', getAllProfilesRouter);
+profileRouter.get('/user/:user_id', getProfileByIdRouter);
+profileRouter.get('/me', getProfileMeRouter);
+profileRouter.post('/', postCreateUpdateRouter);
 // profile.put('/experience', putProfileExperience);
 
-export default profile;
+export default profileRouter;
