@@ -3,7 +3,7 @@ import { check, validationResult, Result } from 'express-validator';
 import gravatar from 'gravatar';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import User from '../../../models/User';
+import User, { UserDocument } from '../../../models/User';
 import config from 'config';
 import { IGetUserAuthBodyRequest } from '../api.interfaces';
 
@@ -31,7 +31,7 @@ userRouter.post(
     const { name, email, password }: IGetUserAuthBodyRequest = req.body;
 
     try {
-      let user: User = await User.findOne({ email });
+      let user: UserDocument = await User.findOne({ email });
       if (user) {
         return res
           .status(400)

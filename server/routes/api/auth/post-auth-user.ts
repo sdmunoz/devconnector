@@ -1,5 +1,5 @@
 import express, { Router, Response } from 'express';
-import User from '../../../models/User';
+import User, { UserDocument } from '../../../models/User';
 import config from 'config';
 import { check, validationResult, Result } from 'express-validator';
 import jwt from 'jsonwebtoken';
@@ -26,7 +26,7 @@ postAuthUserRouter.post(
     const { email, password }: IGetUserAuthBodyRequest = req.body;
 
     try {
-      const user: User = await User.findOne({ email });
+      const user: UserDocument = await User.findOne({ email });
       if (!user) {
         return res
           .status(400)

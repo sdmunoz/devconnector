@@ -1,6 +1,6 @@
 import express, { Router, Response } from 'express';
 import authMiddleware from '../../../middleware/auth';
-import User from '../../../models/User';
+import User, { UserDocument } from '../../../models/User';
 import { IGetUserAuthInfoRequest } from '../api.interfaces';
 
 const getAuthUserRouter: Router = express.Router();
@@ -13,7 +13,9 @@ getAuthUserRouter.get(
   authMiddleware,
   async (req: IGetUserAuthInfoRequest, res: Response) => {
     try {
-      const user: User = await User.findById(req.user.id).select('-password');
+      const user: UserDocument = await User.findById(req.user.id).select(
+        '-password'
+      );
       return res.json(user);
     } catch (error) {
       console.log(error.message);
