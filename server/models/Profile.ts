@@ -23,12 +23,13 @@ interface IProfile {
   ];
   education: [
     {
+      _id: string;
       school: string;
       degree: string;
       fieldofstudy: string;
       from: string;
       to: string;
-      current: boolean;
+      current: string;
       description: string;
     }
   ];

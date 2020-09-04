@@ -22,6 +22,9 @@ export interface IGetUserAuthBodyRequest extends Request {
   to: string;
   current: string;
   description: string;
+  school: string;
+  degree: string;
+  fieldofstudy: string;
 }
 
 export interface IGetUserAuthInfoRequest extends Request {

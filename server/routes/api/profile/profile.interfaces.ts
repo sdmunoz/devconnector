@@ -8,3 +8,14 @@ export interface IExperience {
   current: string;
   description: string;
 }
+
+export interface IEducation {
+  _id: string;
+  school: string;
+  degree: string;
+  fieldofstudy: string;
+  from: string;
+  to: string;
+  current: string;
+  description: string;
+}
