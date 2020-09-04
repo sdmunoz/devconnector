@@ -6,6 +6,7 @@ import {
   IGetUserAuthBodyRequest,
   IGetUserAuthInfoRequest,
 } from '../api.interfaces';
+import { IExperience } from './profile.interfaces';
 
 const putProfileExperienceRouter: Router = express.Router();
 
@@ -29,6 +30,7 @@ putProfileExperienceRouter.put(
     }
 
     const {
+      _id,
       title,
       company,
       location,
@@ -38,7 +40,8 @@ putProfileExperienceRouter.put(
       description,
     }: IGetUserAuthBodyRequest = req.body;
 
-    const newExp: Record<string, unknown> = {
+    const newExp: IExperience = {
+      _id,
       title,
       company,
       location,

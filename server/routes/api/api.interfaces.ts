@@ -1,6 +1,7 @@
 import { Request } from 'express';
 
 export interface IGetUserAuthBodyRequest extends Request {
+  _id: string;
   name: string;
   email: string;
   password: string;
@@ -27,15 +28,4 @@ export interface IGetUserAuthInfoRequest extends Request {
   user: {
     id: string;
   };
-}
-
-export interface IProfileFields {
-  user: string;
-  company: string;
-  website: string;
-  location: string;
-  bio: string;
-  status: string;
-  githubusername: string;
-  skills: string;
 }
