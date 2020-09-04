@@ -1,5 +1,5 @@
 import express, { Router, Response } from 'express';
-import Profile from '../../../models/Profile';
+import Profile, { ProfileDocument } from '../../../models/Profile';
 import auth from '../../../middleware/auth';
 import { IGetUserAuthInfoRequest } from '../api.interfaces';
 
@@ -13,16 +13,14 @@ getProfleMeRouter.get(
   auth,
   async (req: IGetUserAuthInfoRequest, res: Response) => {
     try {
-      const profile: Profile = await Profile.findOne({
+      const profile: ProfileDocument = await Profile.findOne({
         user: req.user.id,
       }).populate('user', ['name', 'avatar']);
-
       if (!profile) {
         return res
           .status(400)
           .json({ msg: 'There is no profile for this user' });
       }
-
       return res.json(profile);
     } catch (error) {
       console.error(error.message);

@@ -1,5 +1,5 @@
 import express, { Router, Response } from 'express';
-import Profile from '../../../models/Profile';
+import Profile, { ProfileDocument } from '../../../models/Profile';
 import auth from '../../../middleware/auth';
 import { check, validationResult, Result } from 'express-validator';
 import {
@@ -70,7 +70,9 @@ postCreateUpdateRouter.post(
     if (instagram) profileFields.social.instagram = instagram;
 
     try {
-      let profile: Profile = await Profile.findOne({ user: req.user.id });
+      let profile: ProfileDocument = await Profile.findOne({
+        user: req.user.id,
+      });
 
       if (profile) {
         // Update

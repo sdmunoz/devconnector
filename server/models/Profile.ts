@@ -1,6 +1,50 @@
-const mongoose = require('mongoose');
+import mongoose, { Schema, Model, Document } from 'mongoose';
 
-const ProfileSchema = new mongoose.Schema({
+interface IProfile {
+  user: string;
+  company: string;
+  website: string;
+  location: string;
+  status: string;
+  skills: string;
+  bio: string;
+  githubusername: string;
+  experience: [
+    {
+      _id: string;
+      title: string;
+      company: string;
+      location: string;
+      from: string;
+      to: string;
+      current: string;
+      description: string;
+    }
+  ];
+  education: [
+    {
+      school: string;
+      degree: string;
+      fieldofstudy: string;
+      from: string;
+      to: string;
+      current: boolean;
+      description: string;
+    }
+  ];
+  social: {
+    youtube: string;
+    twitter: string;
+    facebook: string;
+    linkedin: string;
+    instagram: string;
+  };
+  date: string;
+}
+
+export type ProfileDocument = IProfile & Document;
+
+const ProfileSchema: Schema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'user',
@@ -110,4 +154,9 @@ const ProfileSchema = new mongoose.Schema({
   },
 });
 
-module.exports = Profile = mongoose.model('profile', ProfileSchema);
+const Profile: Model<ProfileDocument> = mongoose.model(
+  'profile',
+  ProfileSchema
+);
+
+export default Profile;

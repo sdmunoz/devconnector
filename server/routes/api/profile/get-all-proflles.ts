@@ -1,5 +1,5 @@
 import express, { Router, Request, Response } from 'express';
-import Profile from '../../../models/Profile';
+import Profile, { ProfileDocument } from '../../../models/Profile';
 
 const getAllProfilesRouter: Router = express.Router();
 
@@ -8,7 +8,7 @@ const getAllProfilesRouter: Router = express.Router();
 // @access  Public
 getAllProfilesRouter.get('/', async (req: Request, res: Response) => {
   try {
-    const profiles: Profile = await Profile.find().populate('user', [
+    const profiles: ProfileDocument[] = await Profile.find().populate('user', [
       'name',
       'avatar',
     ]);

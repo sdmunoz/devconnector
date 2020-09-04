@@ -1,5 +1,5 @@
 import express, { Router, Response } from 'express';
-import Profile from '../../../models/Profile';
+import Profile, { ProfileDocument } from '../../../models/Profile';
 import auth from '../../../middleware/auth';
 import { check, validationResult, Result } from 'express-validator';
 import {
@@ -49,7 +49,9 @@ putProfileExperienceRouter.put(
     };
 
     try {
-      const profile: Profile = await Profile.findOne({ user: req.user.id });
+      const profile: ProfileDocument = await Profile.findOne({
+        user: req.user.id,
+      });
       profile.experience.unshift(newExp);
 
       await profile.save();

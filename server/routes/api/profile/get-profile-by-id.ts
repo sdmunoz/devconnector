@@ -1,5 +1,5 @@
 import express, { Router, Request, Response } from 'express';
-import Profile from '../../../models/Profile';
+import Profile, { ProfileDocument } from '../../../models/Profile';
 
 const getProfileByIdRouter: Router = express.Router();
 
@@ -10,10 +10,9 @@ getProfileByIdRouter.get(
   '/user/:user_id',
   async (req: Request, res: Response) => {
     try {
-      const profile: Profile = await Profile.findOne({
+      const profile: ProfileDocument = await Profile.findOne({
         user: req.params.user_id,
       }).populate('user', ['name', 'avatar']);
-
       if (!profile) {
         return res.status(400).json({ msg: 'Profile not found' });
       }

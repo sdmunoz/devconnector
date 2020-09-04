@@ -1,6 +1,6 @@
 import express, { Router, Response } from 'express';
 import auth from '../../../middleware/auth';
-import Profile from '../../../models/Profile';
+import Profile, { ProfileDocument } from '../../../models/Profile';
 import { IGetUserAuthInfoRequest } from '../api.interfaces';
 
 const deleteProfileExperienceRouter: Router = express.Router();
@@ -13,12 +13,12 @@ deleteProfileExperienceRouter.delete(
   auth,
   async (req: IGetUserAuthInfoRequest, res: Response) => {
     try {
-      const profile: Profile = await Profile.findOne({
+      const profile: ProfileDocument = await Profile.findOne({
         user: req.user.id,
       });
       // Get remove index
       const removeIndex: number = profile.experience
-        .map((item: { id: string }) => item.id)
+        .map((item: { _id: string }) => item._id)
         .indexOf(req.params.exp_id);
       profile.experience.splice(removeIndex, 1);
       await profile.save();
