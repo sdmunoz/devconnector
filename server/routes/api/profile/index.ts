@@ -8,6 +8,7 @@ import postCreateUpdateRouter from './post-create-update';
 import putProfileExperience from './put-profile-experience';
 import putProfileEducation from './put-profile-education';
 import deleteProfileEducationRouter from './delete-profile-education';
+import getProfileGithubRouter from './get-profile-github';
 const profileRouter: Router = express.Router();
 
 profileRouter.delete('/experience/:exp_id', deleteProfileExperienceRouter);
@@ -19,5 +20,6 @@ profileRouter.post('/', postCreateUpdateRouter);
 profileRouter.put('/experience', putProfileExperience);
 profileRouter.put('/education', putProfileEducation);
 profileRouter.delete('/education/:edu_id', deleteProfileEducationRouter);
+profileRouter.get('/github/:username', getProfileGithubRouter);
 
 export default profileRouter;

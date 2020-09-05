@@ -5,7 +5,7 @@ export interface IExperience {
   location: string;
   from: string;
   to: string;
-  current: string;
+  current: boolean;
   description: string;
 }
 
@@ -16,6 +16,14 @@ export interface IEducation {
   fieldofstudy: string;
   from: string;
   to: string;
-  current: string;
+  current: boolean;
   description: string;
+}
+
+export interface IGithubRequestOptions {
+  uri: string;
+  method: string;
+  headers: {
+    [userAgent: string]: string;
+  };
 }

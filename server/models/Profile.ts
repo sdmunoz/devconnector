@@ -17,7 +17,7 @@ interface IProfile {
       location: string;
       from: string;
       to: string;
-      current: string;
+      current: boolean;
       description: string;
     }
   ];
@@ -29,7 +29,7 @@ interface IProfile {
       fieldofstudy: string;
       from: string;
       to: string;
-      current: string;
+      current: boolean;
       description: string;
     }
   ];

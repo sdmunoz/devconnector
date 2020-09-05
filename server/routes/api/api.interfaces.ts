@@ -20,7 +20,7 @@ export interface IGetUserAuthBodyRequest extends Request {
   title: string;
   from: string;
   to: string;
-  current: string;
+  current: boolean;
   description: string;
   school: string;
   degree: string;
