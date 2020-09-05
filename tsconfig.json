@@ -10,5 +10,5 @@
     "baseUrl": "."
   },
   "include": ["src/**/*", "server/**/*"],
-  "exclude": ["node_modules/*", "server/types/*"]
+  "exclude": ["node_modules/*", "server/middleware/*"]
 }
