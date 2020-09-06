@@ -6,6 +6,7 @@
   "scripts": {
     "build-server": "yarn build-ts",
     "build-ts": "tsc --project ./",
+    "cypress:open": "cypress open",
     "test": "jest --coverage",
     "lint": "eslint . --ext .ts",
     "start": "node ./server/server.ts",
