@@ -1,12 +1,18 @@
 describe('Auth API endpoints', () => {
   let token = '';
-  const email = 'sdmunoz@yahoo.com';
+  let userInfo = null;
+
+  before(() => {
+    cy.fixture('user-info.json').then((user) => {
+      userInfo = user;
+    });
+  });
 
   it('Login Auth User', () => {
     cy.request({
       method: 'POST',
       url: '/api/auth',
-      body: { email, password: 'password' },
+      body: { email: userInfo.email, password: userInfo.password },
     })
       .its('body')
       .then((response) => {
@@ -26,7 +32,7 @@ describe('Auth API endpoints', () => {
       .its('body')
       .then((response) => {
         console.log(response);
-        expect(email).to.equal(response.email);
+        expect(userInfo.email).to.equal(response.email);
         cy.log('Found correct User.');
       });
   });

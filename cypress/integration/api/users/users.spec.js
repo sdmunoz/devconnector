@@ -1,15 +1,19 @@
 describe('Users API endpoints', () => {
   let token = '';
-  const name = 'Another Tester';
-  const email = 'testuser02@yahoo.com';
-  const password = 'password';
+  let userInfo = null;
+
+  before(() => {
+    cy.fixture('user-info.json').then((user) => {
+      userInfo = user;
+    });
+  });
 
   before(() => {
     // Login to Test user
     cy.request({
       method: 'POST',
       url: '/api/auth',
-      body: { email, password },
+      body: { email: userInfo.email, password: userInfo.password },
     })
       .its('body')
       .then((response) => {
@@ -37,7 +41,11 @@ describe('Users API endpoints', () => {
     cy.request({
       method: 'POST',
       url: '/api/users',
-      body: { name, email, password },
+      body: {
+        name: userInfo.name,
+        email: userInfo.email,
+        password: userInfo.password,
+      },
     })
       .its('body')
       .then((response) => {
