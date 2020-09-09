@@ -29,7 +29,7 @@ describe('Profile API endpoints', () => {
       .then((response) => {
         console.log(response);
         expect(response.status).to.not.equal(null);
-        expect(response.skills).to.not.equal(0);
+        expect(response.skills.length).to.not.equal(0);
         cy.log('Retrieved Test Profile');
       });
   });
