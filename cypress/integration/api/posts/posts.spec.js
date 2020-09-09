@@ -76,7 +76,7 @@ describe('Posts API endpoints', () => {
       .then((response) => {
         console.log(response);
         expect(response.msg).to.equal('Post removed');
-        cy.log('A post was retrieved by ID');
+        cy.log('Post removed');
       });
   });
 });
