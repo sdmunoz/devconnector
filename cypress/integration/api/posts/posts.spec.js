@@ -40,6 +40,34 @@ describe('Posts API endpoints', () => {
       });
   });
 
+  it('should like a post', () => {
+    cy.request({
+      method: 'PUT',
+      url: '/api/posts/like/' + postId,
+      headers: { 'x-auth-token': token, 'Content-Type': 'application/json' },
+    })
+      .its('body')
+      .then((response) => {
+        console.log(response);
+        expect(response.length).to.be.gt(0);
+        cy.log('Post has been liked.');
+      });
+  });
+
+  it('should unlike a post', () => {
+    cy.request({
+      method: 'PUT',
+      url: '/api/posts/unlike/' + postId,
+      headers: { 'x-auth-token': token, 'Content-Type': 'application/json' },
+    })
+      .its('body')
+      .then((response) => {
+        console.log(response);
+        expect(response.length).to.equal(0);
+        cy.log('Post has been liked.');
+      });
+  });
+
   it('should get all post', () => {
     cy.request({
       method: 'GET',
@@ -74,7 +102,6 @@ describe('Posts API endpoints', () => {
     })
       .its('body')
       .then((response) => {
-        console.log(response);
         expect(response.msg).to.equal('Post removed');
         cy.log('Post removed');
       });
