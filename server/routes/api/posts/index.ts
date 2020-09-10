@@ -5,6 +5,8 @@ import getPostById from './get-post-by-id';
 import deletePostById from './delete-post-by-id';
 import putLikeAPost from './put-like-a-post';
 import putUnlikeAPost from './put-unlike-a-post';
+import postCommentPost from './post-comment-post';
+import deleteCommentPost from './delete-comment-post';
 
 const postRouter: Router = express.Router();
 
@@ -14,5 +16,7 @@ postRouter.get('/:id', getPostById);
 postRouter.delete('/:id', deletePostById);
 postRouter.put('/like/:id', putLikeAPost);
 postRouter.put('/unlike/:id', putUnlikeAPost);
+postRouter.post('/comment/:id', postCommentPost);
+postRouter.delete('/comment/:id/:comment_id', deleteCommentPost);
 
 export default postRouter;

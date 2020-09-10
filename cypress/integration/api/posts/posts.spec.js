@@ -48,7 +48,6 @@ describe('Posts API endpoints', () => {
     })
       .its('body')
       .then((response) => {
-        console.log(response);
         expect(response.length).to.be.gt(0);
         cy.log('Post has been liked.');
       });
@@ -62,7 +61,6 @@ describe('Posts API endpoints', () => {
     })
       .its('body')
       .then((response) => {
-        console.log(response);
         expect(response.length).to.equal(0);
         cy.log('Post has been liked.');
       });
