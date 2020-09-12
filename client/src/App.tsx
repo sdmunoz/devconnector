@@ -1,10 +1,17 @@
 import React from 'react';
+import AppBarComponent from './shared/components/app-bar/app-bar.component';
+import Landing from './shared/components/landing/landing.component';
 
 interface IProps {}
 
 class App extends React.Component<IProps> {
   render() {
-    return <React.Fragment>App</React.Fragment>;
+    return (
+      <>
+        <AppBarComponent />
+        <Landing />
+      </>
+    );
   }
 }
 
