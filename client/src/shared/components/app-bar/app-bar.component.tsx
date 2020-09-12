@@ -1,5 +1,5 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Grid from '@material-ui/core/Grid';
@@ -7,16 +7,15 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 
 const AppBarComponent = (props: any) => {
-  const { classes } = props;
+  const classes = styles();
   return (
     <AppBar position='static' className={classes.appBackground}>
       <Toolbar>
-        <Grid item xs={6}>
+        <Grid container>
           <Typography variant='h6'>Devconnector</Typography>
         </Grid>
         <Grid
           container
-          xs={6}
           alignItems='flex-start'
           justify='flex-end'
           direction='row'
@@ -30,12 +29,10 @@ const AppBarComponent = (props: any) => {
   );
 };
 
-const styles = () => {
-  return {
-    appBackground: {
-      backgroundColor: '#1d3557',
-    },
-  };
-};
+const styles = makeStyles((theme) => ({
+  appBackground: {
+    backgroundColor: theme.palette.primary.main,
+  },
+}));
 
-export default withStyles(styles)(AppBarComponent);
+export default AppBarComponent;
