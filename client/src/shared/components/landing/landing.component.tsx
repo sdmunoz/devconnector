@@ -1,9 +1,9 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
+import { Link } from 'react-router-dom';
 
 const Landing = (props: any) => {
   const classes = styles();
@@ -15,16 +15,10 @@ const Landing = (props: any) => {
         </Typography>
       </Grid>
       <Grid item className={classes.gridCenter}>
-        <Button
-          color='primary'
-          variant='contained'
-          className={classes.buttonMargin}
-        >
+        <Link to='/register' className={classes.buttonMargin}>
           Signup
-        </Button>
-        <Button color='secondary' variant='contained'>
-          Login
-        </Button>
+        </Link>
+        <Link to='/login'>Login</Link>
       </Grid>
     </Container>
   );

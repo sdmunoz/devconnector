@@ -1,10 +1,10 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
 
 const AppBarComponent = (props: any) => {
   const classes = styles();
@@ -12,7 +12,9 @@ const AppBarComponent = (props: any) => {
     <AppBar position='static' className={classes.appBackground}>
       <Toolbar>
         <Grid container>
-          <Typography variant='h6'>Devconnector</Typography>
+          <Link to='/' className={classes.linkColor}>
+            <Typography variant='h6'>Devconnector</Typography>
+          </Link>
         </Grid>
         <Grid
           container
@@ -20,9 +22,15 @@ const AppBarComponent = (props: any) => {
           justify='flex-end'
           direction='row'
         >
-          <Button color='inherit'>Developers</Button>
-          <Button color='inherit'>Register</Button>
-          <Button color='inherit'>Login</Button>
+          <Link to='/' className={classes.linkColor}>
+            <Typography>Developers</Typography>
+          </Link>
+          <Link to='/register' className={classes.linkColor}>
+            <Typography>Register</Typography>
+          </Link>
+          <Link to='/login' className={classes.linkColor}>
+            <Typography>Login</Typography>
+          </Link>
         </Grid>
       </Toolbar>
     </AppBar>
@@ -32,6 +40,11 @@ const AppBarComponent = (props: any) => {
 const styles = makeStyles((theme) => ({
   appBackground: {
     backgroundColor: theme.palette.primary.main,
+  },
+  linkColor: {
+    color: 'white',
+    margin: '0 10px',
+    textDecoration: 'none',
   },
 }));
 
